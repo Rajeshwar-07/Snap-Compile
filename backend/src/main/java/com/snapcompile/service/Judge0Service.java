@@ -4,29 +4,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
 import java.util.*;
-import lombok.Data;
 
 @Service
 public class Judge0Service {
 
-    private static final String PISTON_URL = "https://emkc.org/api/v2/piston/execute";
+    private static final String GLOT_URL = "https://glot.io/api/run/%s/latest";
 
     private static final Map<String, String> LANGUAGE_MAP = Map.of(
         "java", "java",
         "python", "python",
         "javascript", "javascript",
-        "cpp", "c++",
+        "cpp", "cpp",
         "c", "c",
         "go", "go"
     );
 
-    private static final Map<String, String> VERSION_MAP = Map.of(
-        "java", "15.0.2",
-        "python", "3.10.0",
-        "javascript", "18.15.0",
-        "cpp", "10.2.0",
-        "c", "10.2.0",
-        "go", "1.16.2"
+    private static final Map<String, String> FILENAME_MAP = Map.of(
+        "java", "Main.java",
+        "python", "main.py",
+        "javascript", "main.js",
+        "cpp", "main.cpp",
+        "c", "main.c",
+        "go", "main.go"
     );
 
     public ExecutionResult executeCode(String code, String language, String stdin) {
@@ -34,36 +33,45 @@ public class Judge0Service {
             RestTemplate restTemplate = new RestTemplate();
 
             String lang = LANGUAGE_MAP.getOrDefault(language.toLowerCase(), "python");
-            String version = VERSION_MAP.getOrDefault(language.toLowerCase(), "3.10.0");
+            String filename = FILENAME_MAP.getOrDefault(language.toLowerCase(), "main.py");
+            String url = String.format(GLOT_URL, lang);
 
-           Map<String, Object> file = new HashMap<>();
-            file.put("name", "main");
+            Map<String, Object> file = new HashMap<>();
+            file.put("name", filename);
             file.put("content", code);
-            
+
             Map<String, Object> body = new HashMap<>();
-            body.put("language", lang);
-            body.put("version", version);
             body.put("files", List.of(file));
-            body.put("compile_timeout", 10000);
-            body.put("run_timeout", 3000);
+            if (stdin != null && !stdin.isEmpty()) {
+                body.put("stdin", stdin);
+            }
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
-            ResponseEntity<Map> response = restTemplate.postForEntity(PISTON_URL, request, Map.class);
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, request, Map.class);
 
-            Map run = (Map) response.getBody().get("run");
-            String stdout = (String) run.get("stdout");
-            String stderr = (String) run.get("stderr");
-            int code2 = (int) run.get("code");
+            Map<String, Object> responseBody = response.getBody();
+            String stdout = (String) responseBody.get("stdout");
+            String stderr = (String) responseBody.get("stderr");
+            String error = (String) responseBody.get("error");
 
             ExecutionResult result = new ExecutionResult();
             result.setOutput(stdout);
-            result.setStatus(code2 == 0 ? "ACCEPTED" : "RUNTIME_ERROR");
-            result.setErrorMessage(stderr);
             result.setRuntimeMs("N/A");
             result.setMemoryUsed("N/A");
+
+            if (error != null && !error.isEmpty()) {
+                result.setStatus("RUNTIME_ERROR");
+                result.setErrorMessage(error);
+            } else if (stderr != null && !stderr.isEmpty()) {
+                result.setStatus("RUNTIME_ERROR");
+                result.setErrorMessage(stderr);
+            } else {
+                result.setStatus("ACCEPTED");
+            }
+
             return result;
 
         } catch (Exception e) {
