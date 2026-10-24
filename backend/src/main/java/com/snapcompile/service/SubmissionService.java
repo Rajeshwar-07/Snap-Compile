@@ -37,7 +37,7 @@ public class SubmissionService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Execute code via Judge0
-        Judge0Service.ExecutionResult executionResult =
+        ExecutionResult executionResult =
                 judge0Service.executeCode(request.getCode(), request.getLanguage(), request.getStdin());
 
         // Build submission object
@@ -46,11 +46,11 @@ public class SubmissionService {
                 .problemTitle(request.getProblemTitle() != null ? request.getProblemTitle() : "Untitled")
                 .language(request.getLanguage())
                 .code(request.getCode())
-                .status(executionResult.status)
-                .output(executionResult.output)
-                .errorMessage(executionResult.errorMessage)
-                .runtimeMs(executionResult.runtimeMs)
-                .memoryUsed(executionResult.memoryUsed)
+               .status(executionResult.getStatus())
+                .output(executionResult.getOutput())
+                .errorMessage(executionResult.getErrorMessage())
+                .runtimeMs(executionResult.getRuntimeMs())
+                .memoryUsed(executionResult.getMemoryUsed())
                 .timeComplexity(request.getTimeComplexity())
                 .spaceComplexity(request.getSpaceComplexity())
                 .build();
