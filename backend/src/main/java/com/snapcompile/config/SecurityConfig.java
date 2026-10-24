@@ -83,20 +83,6 @@ public class SecurityConfig {
     }
 
     /**
-     * Load user by email from database (used by Spring Security)
-     */
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return email -> userRepository.findByEmail(email)
-                .map(user -> org.springframework.security.core.userdetails.User
-                        .withUsername(user.getEmail())
-                        .password(user.getPassword())
-                        .authorities("ROLE_USER")
-                        .build())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
-    }
-
-    /**
      * Authentication provider - connects UserDetailsService + PasswordEncoder
      */
     @Bean
