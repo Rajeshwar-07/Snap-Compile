@@ -48,7 +48,7 @@ public class SecurityConfig {
      * Define which routes are public and which need authentication
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         http
             .csrf(csrf -> csrf.disable())                          // Disable CSRF (using JWT)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
