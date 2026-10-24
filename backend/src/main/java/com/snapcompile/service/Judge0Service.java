@@ -36,16 +36,16 @@ public class Judge0Service {
             String lang = LANGUAGE_MAP.getOrDefault(language.toLowerCase(), "python");
             String version = VERSION_MAP.getOrDefault(language.toLowerCase(), "3.10.0");
 
-            Map<String, Object> file = new HashMap<>();
+           Map<String, Object> file = new HashMap<>();
+            file.put("name", "main");
             file.put("content", code);
-
+            
             Map<String, Object> body = new HashMap<>();
             body.put("language", lang);
             body.put("version", version);
             body.put("files", List.of(file));
-            if (stdin != null && !stdin.isEmpty()) {
-                body.put("stdin", stdin);
-            }
+            body.put("compile_timeout", 10000);
+            body.put("run_timeout", 3000);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
