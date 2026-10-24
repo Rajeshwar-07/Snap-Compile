@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
 import java.util.*;
+import lombok.Data;
 
 @Service
 public class Judge0Service {
@@ -72,4 +73,13 @@ public class Judge0Service {
             return result;
         }
     }
+}
+
+@Data
+class ExecutionResult {
+    private String output;
+    private String status;
+    private String errorMessage;
+    private String runtimeMs;
+    private String memoryUsed;
 }
