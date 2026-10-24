@@ -37,7 +37,7 @@ public class SubmissionService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Execute code via Judge0
-        Judge0Service.ExecutionResult executionResult =
+        ExecutionResult executionResult =
                 judge0Service.executeCode(request.getCode(), request.getLanguage(), request.getStdin());
 
         // Build submission object
