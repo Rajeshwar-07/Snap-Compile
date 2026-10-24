@@ -1,0 +1,70 @@
+/* =============================================
+   Global Styles - SnapCompile Dark Theme
+   ============================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color palette */
+  --bg-primary: #0f1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --border-color: #30363d;
+  --text-primary: #e6edf3;
+  --text-secondary: #c9d1d9;
+  --text-muted: #8b949e;
+  --text-faint: #6e7681;
+  --accent-purple: #7c3aed;
+  --accent-blue: #3b82f6;
+  --accent-green: #3fb950;
+  --accent-red: #f85149;
+  --accent-orange: #f97316;
+  --accent-yellow: #f59e0b;
+  --gradient-main: linear-gradient(135deg, #7c3aed, #3b82f6);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Code font */
+code, pre, .mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Button reset */
+button {
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  outline: none;
+}
+
+/* Input reset */
+input, textarea {
+  font-family: 'Inter', sans-serif;
+  outline: none;
+}
+
+/* Link reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}

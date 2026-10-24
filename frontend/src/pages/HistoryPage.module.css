@@ -1,0 +1,161 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.newCodeBtn {
+  padding: 9px 18px;
+  background: var(--gradient-main);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  transition: opacity 0.15s;
+}
+.newCodeBtn:hover { opacity: 0.85; }
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 5px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.15s;
+}
+.filterBtn:hover { color: var(--text-primary); }
+.filterActive {
+  background: var(--accent-purple);
+  border-color: var(--accent-purple);
+  color: #fff;
+}
+
+/* ── States ── */
+.loadingText { font-size: 14px; color: var(--text-muted); }
+.errorText { font-size: 14px; color: var(--accent-red); }
+.emptyState {
+  text-align: center;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ── Cards ── */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s;
+  gap: 12px;
+}
+.card:hover {
+  border-color: var(--accent-purple);
+  background: var(--bg-tertiary);
+}
+
+.cardLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cardIndex {
+  font-size: 12px;
+  color: var(--text-faint);
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 28px;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.cardDate {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.cardRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.langBadge {
+  padding: 3px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.statusBadge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.accepted { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+.failed { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+.pending { background: rgba(245,158,11,0.15); color: var(--accent-yellow); }
+
+.runtimeBadge {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.chevron { opacity: 0.5; }

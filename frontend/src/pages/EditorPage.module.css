@@ -1,0 +1,226 @@
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar (shared) ── */
+.sidebar, .outputPanel {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+.sidebar { border-right: 1px solid var(--border-color); }
+.outputPanel { border-left: 1px solid var(--border-color); }
+
+.sidebarTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebarLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ── Upload zone ── */
+.uploadZone {
+  background: var(--bg-primary);
+  border: 1.5px dashed var(--border-color);
+  border-radius: 10px;
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  text-align: center;
+}
+.uploadZone:hover { border-color: var(--accent-purple); }
+.uploadZone span { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+.uploadZone small { font-size: 11px; color: var(--text-faint); }
+
+/* ── OCR status ── */
+.ocrStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-purple);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Title input ── */
+.titleField { display: flex; flex-direction: column; }
+.titleInput {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+.titleInput::placeholder { color: var(--text-faint); }
+.titleInput:focus { border-color: var(--accent-purple); }
+
+/* ── History button ── */
+.historyBtn {
+  padding: 9px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  transition: all 0.15s;
+}
+.historyBtn:hover { border-color: var(--accent-purple); color: var(--text-primary); }
+
+/* ── Editor section ── */
+.editorSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editorToolbar {
+  height: 48px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.langPills {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.langPill {
+  padding: 4px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.langPill:hover { color: var(--text-primary); }
+.langPillActive {
+  background: var(--accent-purple);
+  border-color: var(--accent-purple);
+  color: #fff;
+}
+
+.runBtn {
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #238636, #2ea043);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+.runBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spinnerSmall {
+  width: 12px; height: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.editorWrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Output panel ── */
+.statusBadge {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.statusGreen { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+.statusRed { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+.statusYellow { background: rgba(245,158,11,0.15); color: var(--accent-yellow); }
+
+.statSmall { font-weight: 400; opacity: 0.8; }
+
+.outputBox {
+  flex: 1;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 12px;
+  overflow-y: auto;
+  min-height: 120px;
+}
+
+.outputMuted {
+  font-size: 12px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.outputText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-green);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.errorText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent-red);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
